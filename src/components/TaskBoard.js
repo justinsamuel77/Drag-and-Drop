@@ -6,6 +6,7 @@ import Column from "./Column";
 const TaskBoard = () => {
   const dispatch = useDispatch();
   const { todo, inProgress, completed } = useSelector((state) => state.tasks.tasks);
+
   const handleDragStart = (taskId) => {
     window.taskId = taskId;
   };
@@ -23,9 +24,9 @@ const TaskBoard = () => {
 
   return (
     <div style={{ display: "flex", gap: "10px" }}>
-      <Column title="To Do" tasks={todo} onDrop={() => handleDrop("todo")} onDragStart={handleDragStart} />
-      <Column title="In Progress" tasks={inProgress} onDrop={() => handleDrop("inProgress")} onDragStart={handleDragStart} />
-      <Column title="Completed" tasks={completed} onDrop={() => handleDrop("completed")} onDragStart={handleDragStart} />
+      <Column title="To Do" tasks={todo} column="todo" onDrop={() => handleDrop("todo")} onDragStart={handleDragStart} />
+      <Column title="In Progress" tasks={inProgress} column="inProgress" onDrop={() => handleDrop("inProgress")} onDragStart={handleDragStart} />
+      <Column title="Completed" tasks={completed} column="completed" onDrop={() => handleDrop("completed")} onDragStart={handleDragStart} />
     </div>
   );
 };

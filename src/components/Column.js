@@ -1,7 +1,7 @@
 import React from "react";
 import TaskCard from "./TaskCard";
 
-const Column = ({ title, tasks, onDrop, onDragStart }) => {
+const Column = ({ title, tasks, column, onDrop, onDragStart }) => {
   const handleDrop = (e) => {
     e.preventDefault();
     const taskId = e.dataTransfer.getData("taskId");
@@ -26,7 +26,7 @@ const Column = ({ title, tasks, onDrop, onDragStart }) => {
     >
       <h4>{title}</h4>
       {tasks?.map((task) => (
-        <TaskCard key={task.id} task={task} onDragStart={onDragStart} />
+        <TaskCard key={task.id} task={task} onDragStart={onDragStart} column={column} />
       ))}
     </div>
   );

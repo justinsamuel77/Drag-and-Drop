@@ -1,6 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { deleteTask } from "../redux/taskSlice";
 
-const TaskCard = ({ task, onDragStart }) => {
+const TaskCard = ({ task, column, onDragStart }) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteTask({ taskId: task.id, column }));
+  };
+
   return (
     <div
       draggable
@@ -10,10 +18,28 @@ const TaskCard = ({ task, onDragStart }) => {
         margin: "5px",
         backgroundColor: "lightblue",
         border: "1px solid #ddd",
+        position: "relative",
         cursor: "grab",
       }}
     >
-      {task.name}
+      <span>{task.name}</span>
+      <button
+        onClick={handleDelete}
+        style={{
+          position: "absolute",
+          top: "5px",
+          right: "5px",
+          backgroundColor: "red",
+          color: "white",
+          border: "none",
+          borderRadius: "50%",
+          width: "20px",
+          height: "20px",
+          cursor: "pointer",
+        }}
+      >
+        ×
+      </button>
     </div>
   );
 };
