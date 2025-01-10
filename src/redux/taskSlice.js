@@ -27,9 +27,18 @@ const taskSlice = createSlice({
       const { taskId, column } = action.payload;
       state.tasks[column] = state.tasks[column].filter((task) => task.id !== taskId);
       localStorage.setItem("tasks", JSON.stringify(state.tasks))
+    },
+    editTask(state, action) {
+      const { taskId, column, newName } = action.payload;
+      const task = state.tasks[column].find((task) => task.id === taskId);
+      if (task) {
+        task.name = newName;
+        localStorage.setItem("tasks", JSON.stringify(state.tasks));
+      }
     }
+
   },
 });
 
-export const { addTask, moveTask, deleteTask } = taskSlice.actions;
+export const { addTask, moveTask, deleteTask, editTask } = taskSlice.actions;
 export default taskSlice.reducer;
